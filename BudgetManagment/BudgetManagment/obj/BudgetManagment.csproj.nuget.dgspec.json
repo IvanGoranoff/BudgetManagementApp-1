@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\konstantin stoichkov\\source\\repos\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj": {}
+    "C:\\Projects-ig\\budget-master\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\konstantin stoichkov\\source\\repos\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj": {
+    "C:\\Projects-ig\\budget-master\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\konstantin stoichkov\\source\\repos\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj",
+        "projectUniqueName": "C:\\Projects-ig\\budget-master\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj",
         "projectName": "BudgetManagment",
-        "projectPath": "C:\\Users\\konstantin stoichkov\\source\\repos\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj",
-        "packagesPath": "C:\\Users\\konstantin stoichkov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\konstantin stoichkov\\source\\repos\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\obj\\",
+        "projectPath": "C:\\Projects-ig\\budget-master\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\BudgetManagment.csproj",
+        "packagesPath": "C:\\Users\\ivan.goranov\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects-ig\\budget-master\\BudgetManagementApp\\BudgetManagment\\BudgetManagment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\konstantin stoichkov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivan.goranov\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

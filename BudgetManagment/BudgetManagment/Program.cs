@@ -13,7 +13,7 @@ builder.Services.AddControllers()
     });
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=KSTOICHKOV-DW;Database=budgetManagment;User Id=sa;Password=123;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+    options.UseSqlServer("Server=localhost;Database=Demo;Trusted_Connection=True;TrustServerCertificate=True");
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

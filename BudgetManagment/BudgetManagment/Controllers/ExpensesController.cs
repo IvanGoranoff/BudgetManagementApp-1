@@ -1,6 +1,8 @@
 ﻿using BudgetManagment.DbModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mime;
 
 namespace BudgetManagment.Controllers;
 
@@ -16,7 +18,8 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [HttpGet]
+    [HttpGet("{id}")]
+    [Produces(MediaTypeNames.Application.Json)]
     public IActionResult GetExpenses(int id)
     {
         // Validate unique email
@@ -25,7 +28,7 @@ public class ExpensesController : ControllerBase
             return Conflict("Wrong id");
         }
 
-        return Ok(_dbContext.Expenses.FirstOrDefault(i => i.Id == id)!.Value);
+        return Ok(new { Income = _dbContext.Expenses.FirstOrDefault(i => i.Id == id)!.Value });
     }
 
 
