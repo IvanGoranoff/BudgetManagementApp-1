@@ -12,8 +12,7 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-    "parserOptions": {
-    },
+
   "settings": {
     "react": {
       "createClass": "createReactClass", // Regex for Component Factory to use,
@@ -33,12 +32,12 @@
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "requireConfigFile": false,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "impliedStrict": true,
       "jsx": true
     },
+ 
     "ecmaVersion": 12
   },
   "plugins": ["prettier", "react", "react-hooks"],
