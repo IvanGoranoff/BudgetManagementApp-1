@@ -1,60 +1,35 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-
-// material-ui
-import { useTheme } from '@mui/material/styles';
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Stack,
-  Typography,
-  useMediaQuery
-} from '@mui/material';
-
-// third party
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-
-// project imports
-import useScriptRef from 'hooks/useScriptRef';
-import AnimateButton from 'ui-component/extended/AnimateButton';
-
-// assets
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import Google from 'assets/images/icons/social-google.svg';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../../../store/actions';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
-  const scriptedRef = useScriptRef();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-  const customization = useSelector((state) => state.customization);
   const [checked, setChecked] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const googleHandler = async () => {
-    console.error('Login');
-  };
-
-  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const response = await axios.post('YOUR_API_ENDPOINT', { email, password });
+      // Съхраняване на потребителските данни в Redux
+      dispatch(setUser(response?.data?.user));
+      // Пренасочване към Dashboard
+      navigate.push('/dashboard');
+    } catch (error) {
+      console.error('Грешка при вход:', error);
+      // Обработка на грешки
+    }
   };
 
   return (
@@ -67,27 +42,7 @@ const FirebaseLogin = ({ ...others }) => {
               display: 'flex'
             }}
           >
-            <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
 
-            <Button
-              variant="outlined"
-              sx={{
-                cursor: 'unset',
-                m: 2,
-                py: 0.5,
-                px: 7,
-                borderColor: `${theme.palette.grey[100]} !important`,
-                color: `${theme.palette.grey[900]}!important`,
-                fontWeight: 500,
-                borderRadius: `${customization.borderRadius}px`
-              }}
-              disableRipple
-              disabled
-            >
-              OR
-            </Button>
-
-            <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
           </Box>
         </Grid>
         <Grid item xs={12} container alignItems="center" justifyContent="center">
@@ -98,30 +53,12 @@ const FirebaseLogin = ({ ...others }) => {
       </Grid>
 
       <Formik
-        initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
-          submit: null
-        }}
+    initialValues={{ email: '', password: '', submit: null }}
         validationSchema={Yup.object().shape({
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-          try {
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-            }
-          } catch (err) {
-            console.error(err);
-            if (scriptedRef.current) {
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
-          }
-        }}
+        onSubmit={handleLoginSubmit}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>

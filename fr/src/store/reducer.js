@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-// reducer import
+// Съществуващите reducers
 import customizationReducer from './customizationReducer';
-
-// ==============================|| COMBINE REDUCER ||============================== //
-
+import userReducer from './UserReducer'
+// Комбиниране на reducers
 const reducer = combineReducers({
-  customization: customizationReducer
+  customization: customizationReducer,
+  user: userReducer
 });
 
 export default reducer;
