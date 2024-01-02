@@ -1,9 +1,10 @@
 // assets
-import { IconKey } from '@tabler/icons';
+import { IconKey, IconMoneybag } from '@tabler/icons';
 
 // constant
 const icons = {
-  IconKey
+  IconKey,
+  IconMoneybag
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -31,6 +32,36 @@ const pages = {
         {
           id: 'register3',
           title: 'Register',
+          type: 'item',
+          url: '/pages/register/register3',
+          target: true
+        }
+      ]
+    },
+    {
+      id: 'pages',
+      title: 'My Money',
+      type: 'collapse',
+      icon: icons.IconMoneybag,
+
+      children: [
+        {
+          id: 'needs',
+          title: 'Needs',
+          type: 'item',
+          url: '/pages/login/login3',
+          target: true
+        },
+        {
+          id: 'wants',
+          title: 'Wants',
+          type: 'item',
+          url: '/pages/register/register3',
+          target: true
+        },
+        {
+          id: 'save',
+          title: 'Save',
           type: 'item',
           url: '/pages/register/register3',
           target: true
