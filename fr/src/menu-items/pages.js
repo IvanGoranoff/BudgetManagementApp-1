@@ -43,27 +43,26 @@ const pages = {
       title: 'My Money',
       type: 'collapse',
       icon: icons.IconMoneybag,
-
       children: [
         {
           id: 'needs',
           title: 'Needs',
           type: 'item',
-          url: '/pages/login/login3',
+          url: '/sample-page',
           target: true
         },
         {
           id: 'wants',
           title: 'Wants',
           type: 'item',
-          url: '/pages/register/register3',
+          url: '/sample-page',
           target: true
         },
         {
           id: 'save',
           title: 'Save',
           type: 'item',
-          url: '/pages/register/register3',
+          url: '/sample-page',
           target: true
         }
       ]
