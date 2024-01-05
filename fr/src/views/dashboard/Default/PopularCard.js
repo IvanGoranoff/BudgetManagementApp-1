@@ -88,7 +88,7 @@ const PopularCard = ({ isLoading }) => {
                     <Grid container alignItems="center" justifyContent="space-between">
                       <Grid item>
                         <Typography variant="subtitle1" color="inherit">
-                          Cash
+                        05.12.2023
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -119,7 +119,7 @@ const PopularCard = ({ isLoading }) => {
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                      10% Profit
+                    
                     </Typography>
                   </Grid>
                 </Grid>
@@ -129,7 +129,7 @@ const PopularCard = ({ isLoading }) => {
                     <Grid container alignItems="center" justifyContent="space-between">
                       <Grid item>
                         <Typography variant="subtitle1" color="inherit">
-                          Gold
+                        01.12.2023
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -160,7 +160,7 @@ const PopularCard = ({ isLoading }) => {
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                      10% loss
+                 
                     </Typography>
                   </Grid>
                 </Grid>
@@ -170,7 +170,7 @@ const PopularCard = ({ isLoading }) => {
                     <Grid container alignItems="center" justifyContent="space-between">
                       <Grid item>
                         <Typography variant="subtitle1" color="inherit">
-                          Stocks
+                        15.11.2023
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -201,7 +201,7 @@ const PopularCard = ({ isLoading }) => {
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                      10% Profit
+                    
                     </Typography>
                   </Grid>
                 </Grid>
@@ -211,7 +211,7 @@ const PopularCard = ({ isLoading }) => {
                     <Grid container alignItems="center" justifyContent="space-between">
                       <Grid item>
                         <Typography variant="subtitle1" color="inherit">
-                          Cripto
+                        11.11.2023
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -242,7 +242,7 @@ const PopularCard = ({ isLoading }) => {
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                      Investments
+                 
                     </Typography>
                   </Grid>
                 </Grid>
@@ -252,7 +252,7 @@ const PopularCard = ({ isLoading }) => {
                     <Grid container alignItems="center" justifyContent="space-between">
                       <Grid item>
                         <Typography variant="subtitle1" color="inherit">
-                        Interest
+                        10.10.2023
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -283,7 +283,7 @@ const PopularCard = ({ isLoading }) => {
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                      10% loss
+                    
                     </Typography>
                   </Grid>
                 </Grid>

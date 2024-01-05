@@ -3,20 +3,24 @@ import { useState } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, Grid, Menu, MenuItem, Typography } from '@mui/material';
-
+import { Avatar, Box, Grid } from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  IconButton,TextField, Button
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
 import EarningIcon from 'assets/images/icons/earning.svg';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
-import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
-import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
-import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -58,16 +62,43 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const EarningCard = ({ isLoading }) => {
   const theme = useTheme();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [incomeData, setIncomeData] = useState({
+    date: '',
+    amount: '',
+  });
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleEarningIconClick = () => {
+    setModalOpen(true);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
+
+  const handleInputChange = (e) => {
+    setIncomeData({
+      ...incomeData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAddIncome = () => {
+    console.log('Added income:', incomeData);
+    setIncomeData({
+      date: '',
+      amount: '',
+    });
+    handleCloseModal();
+  };
+
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <>
@@ -80,64 +111,21 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container justifyContent="space-between">
                   <Grid item>
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        ...theme.typography.commonAvatar,
-                        ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.secondary[800],
-                        mt: 1
-                      }}
-                    >
-                      <img src={EarningIcon} alt="Notification" />
-                    </Avatar>
+                   <Avatar
+                    variant="rounded"
+                    sx={{
+                      ...theme.typography.commonAvatar,
+                      ...theme.typography.largeAvatar,
+                      backgroundColor: theme.palette.secondary[800],
+                      mt: 1,
+                      cursor: 'pointer' 
+                    }}
+                    onClick={handleEarningIconClick}  
+                  >
+                    <img src={EarningIcon} alt="Notification" />
+                  </Avatar>
                   </Grid>
-                  <Grid item>
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        ...theme.typography.commonAvatar,
-                        ...theme.typography.mediumAvatar,
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: theme.palette.secondary[200],
-                        zIndex: 1
-                      }}
-                      aria-controls="menu-earning-card"
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    >
-                      <MoreHorizIcon fontSize="inherit" />
-                    </Avatar>
-                    <Menu
-                      id="menu-earning-card"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                      variant="selectedMenu"
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right'
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right'
-                      }}
-                    >
-                      <MenuItem onClick={handleClose}>
-                        <GetAppTwoToneIcon sx={{ mr: 1.75 }} /> Import Card
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <FileCopyTwoToneIcon sx={{ mr: 1.75 }} /> Copy Data
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <PictureAsPdfTwoToneIcon sx={{ mr: 1.75 }} /> Export
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <ArchiveTwoToneIcon sx={{ mr: 1.75 }} /> Archive File
-                      </MenuItem>
-                    </Menu>
-                  </Grid>
+                
                 </Grid>
               </Grid>
               <Grid item>
@@ -172,6 +160,59 @@ const EarningCard = ({ isLoading }) => {
               </Grid>
             </Grid>
           </Box>
+
+     
+          <Dialog open={isModalOpen} onClose={handleCloseModal} maxWidth="sm" fullWidth>
+        <DialogTitle>
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={handleCloseModal}
+            sx={{ position: 'absolute', top: theme.spacing(1), right: theme.spacing(1) }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Add Income
+          </Typography>
+          {/* Инпут поле за дата */}
+          <TextField
+            fullWidth
+            type="date"
+            name="date"
+            value={incomeData?.date}
+            onChange={handleInputChange}
+            sx={{ mb: 2 }}
+          />
+
+          {/* Инпут поле за сума */}
+          <TextField
+            fullWidth
+            label="Amount"
+            type="number"
+            name="amount"
+            value={incomeData.amount}
+            onChange={handleInputChange}
+            sx={{ mb: 2 }}
+          />
+
+          {/* Бутони за добавяне и затваряне */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddIncome}
+            sx={{ mr: 2 }}
+          >
+            Add
+          </Button>
+          <Button variant="outlined" color="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </DialogContent>
+      </Dialog>
+
         </CardWrapper>
       )}
     </>
