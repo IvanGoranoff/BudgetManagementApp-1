@@ -12,7 +12,7 @@ const other = {
   children: [
     {
       id: 'sample-page',
-      title: 'How to mange budget?',
+      title: 'How to manage budget?',
       type: 'item',
       url: '/sample-page',
       icon: icons.IconBrandChrome,
