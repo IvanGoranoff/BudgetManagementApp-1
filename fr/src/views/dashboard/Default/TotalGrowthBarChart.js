@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
+import axios from 'axios'; // Import axios for API requests
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Grid, MenuItem, TextField, Typography } from '@mui/material';
@@ -103,6 +103,9 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     };
 
     fetchApiData();
+    const interval = setInterval(fetchApiData, 10000); // 10000 milliseconds = 10 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
   const totalWorth = incomeData - expenseData;
@@ -122,7 +125,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                       <Typography variant="subtitle2">Total Growth</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="h3">$2,324.00</Typography>
+                      <Typography variant="h3">{`$${totalWorth.toFixed(2)}`}</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
