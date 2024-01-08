@@ -9,6 +9,6 @@ const store = createStore(
     applyMiddleware(thunk) // Apply Redux Thunk middleware
 );
 
-const persister = 'Free';
+const persister = 'Home';
 
 export { store, persister };
