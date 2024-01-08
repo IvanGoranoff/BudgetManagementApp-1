@@ -1,13 +1,16 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-
+import nwsImage from './nws.png';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SamplePage = () => (
   <MainCard title="How to manage budget?">
+    <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+      <img src={nwsImage} alt="Budget Management" style={{ maxWidth: '80%', height: 'auto' }} />
+    </Box>
     <Typography variant="body2" paragraph>
       Good life comes by making good choices. Here you can find some tips that will help you stay motivated to keep track of your expenses.
     </Typography>
