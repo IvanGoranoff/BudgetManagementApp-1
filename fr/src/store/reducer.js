@@ -1,12 +1,11 @@
+
 import { combineReducers } from 'redux';
-
-// reducer import
 import customizationReducer from './customizationReducer';
+import expensesReducer from './expensesReducer'; // Import the new reducer
 
-// ==============================|| COMBINE REDUCER ||============================== //
-
-const reducer = combineReducers({
-  customization: customizationReducer
+const rootReducer = combineReducers({
+  customization: customizationReducer,
+  expenses: expensesReducer // Combine the new reducer
 });
 
-export default reducer;
+export default rootReducer;

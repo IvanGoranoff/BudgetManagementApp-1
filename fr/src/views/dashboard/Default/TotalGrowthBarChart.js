@@ -39,7 +39,8 @@ const TotalGrowthBarChart = ({ isLoading }) => {
   const [value, setValue] = useState('today');
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
-
+  const [expenseData, setExpenseData] = useState(0);
+  const [incomeData, setIncomeData] = useState(0);
   const { navType } = customization;
   const { primary } = theme.palette.text;
   const darkLight = theme.palette.dark.light;
@@ -88,6 +89,24 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     }
   }, [navType, primary200, primaryDark, secondaryMain, secondaryLight, primary, darkLight, grey200, isLoading, grey500]);
 
+  useEffect(() => {
+    const fetchApiData = async () => {
+      try {
+        const expensesResponse = await axios.get('https://localhost:7069/api/Expenses/1');
+        setExpenseData(expensesResponse.data);
+
+        const incomeResponse = await axios.get('https://localhost:7069/api/Income/1');
+        setIncomeData(incomeResponse.data);
+      } catch (error) {
+        console.error('Error fetching API data:', error);
+      }
+    };
+
+    fetchApiData();
+  }, []);
+
+  const totalWorth = incomeData - expenseData;
+  console.log(totalWorth)
   return (
     <>
       {isLoading ? (

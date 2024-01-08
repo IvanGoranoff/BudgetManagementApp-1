@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // third-party
 import Chart from 'react-apexcharts';
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
@@ -23,6 +24,7 @@ import ChartDataYear from './chart-data/total-order-year-line-chart';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+import { fetchExpenses } from '../../../store/actions';
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: '#fff',
@@ -69,6 +71,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const TotalOrderLineChartCard = ({ isLoading }) => {
     const theme = useTheme();
+    const dispatch = useDispatch();
+    const expensesData = useSelector((state) => state.expenses); // Accessing expenses data from the store
+
     const [isExpenseModalOpen, setExpenseModalOpen] = useState(false);
     const [expenseData, setExpenseData] = useState({
         amount: '',
@@ -83,6 +88,15 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
     const handleCloseExpenseModal = () => {
         setExpenseModalOpen(false);
     };
+
+    useEffect(() => {
+        dispatch(fetchExpenses()); // Dispatch the fetchExpenses action
+        console.log('Fetched Expenses Data:', expensesData);
+    }, [dispatch]);
+
+    // Log the fetched expenses data
+    useEffect(() => {
+    }, [expensesData]);
 
     const handleAddExpense = async () => {
         try {
