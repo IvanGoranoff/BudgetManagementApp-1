@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -21,6 +21,7 @@ import EarningIcon from 'assets/images/icons/earning.svg';
 // import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
+import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -69,6 +70,7 @@ const EarningCard = ({ isLoading }) => {
     date: '',
     amount: '',
   });
+  const [expenseData, setExpenseData] = useState(null);
 
   const handleEarningIconClick = () => {
     setModalOpen(true);
@@ -79,6 +81,23 @@ const EarningCard = ({ isLoading }) => {
     setModalOpen(false);
 
   };
+
+  useEffect(() => {
+    const fetchExpenseData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7069/api/Expenses/1');
+        setExpenseData(response.data); // Assuming response.data is the number 1001
+        console.log('Response data:', response.data); // Logging the data
+      } catch (error) {
+        console.error('Error fetching expense data:', error);
+        // Handle error appropriately
+      }
+    };
+
+    fetchExpenseData();
+  }, []);
+
+
 
   const handleInputChange = (e) => {
     setIncomeData({
@@ -136,7 +155,7 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$500.00</Typography>
+                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{`$${expenseData.toString()}`}</Typography>
                   </Grid>
                   <Grid item>
                     <Avatar

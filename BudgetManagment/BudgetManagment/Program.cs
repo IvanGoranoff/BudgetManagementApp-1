@@ -16,10 +16,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer("Server=IVAN-G;Database=budgetManagment;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        policyBuilder => policyBuilder.WithOrigins("http://localhost:3000") // URL of your React app
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "BudgetApp", Version = "v1" });
@@ -44,6 +51,8 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
     dbContext.Database.Migrate();
 }
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy"); // Enable CORS using the defined policy
 
 app.UseAuthorization();
 
