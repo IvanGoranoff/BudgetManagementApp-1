@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   Typography,
-  IconButton,TextField, Button
+  IconButton, TextField, Button
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 // project imports
@@ -21,6 +21,8 @@ import EarningIcon from 'assets/images/icons/earning.svg';
 // import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -73,7 +75,9 @@ const EarningCard = ({ isLoading }) => {
   };
 
   const handleCloseModal = () => {
+
     setModalOpen(false);
+
   };
 
   const handleInputChange = (e) => {
@@ -84,11 +88,12 @@ const EarningCard = ({ isLoading }) => {
   };
 
   const handleAddIncome = () => {
-    console.log('Added income:', incomeData);
     setIncomeData({
       date: '',
       amount: '',
     });
+    console.log('Added income:', incomeData);
+    toast.success("Income added successfully");
     handleCloseModal();
   };
 
@@ -111,21 +116,21 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container justifyContent="space-between">
                   <Grid item>
-                   <Avatar
-                    variant="rounded"
-                    sx={{
-                      ...theme.typography.commonAvatar,
-                      ...theme.typography.largeAvatar,
-                      backgroundColor: theme.palette.secondary[800],
-                      mt: 1,
-                      cursor: 'pointer' 
-                    }}
-                    onClick={handleEarningIconClick}  
-                  >
-                    <img src={EarningIcon} alt="Notification" />
-                  </Avatar>
+                    <Avatar
+                      variant="rounded"
+                      sx={{
+                        ...theme.typography.commonAvatar,
+                        ...theme.typography.largeAvatar,
+                        backgroundColor: theme.palette.secondary[800],
+                        mt: 1,
+                        cursor: 'pointer'
+                      }}
+                      onClick={handleEarningIconClick}
+                    >
+                      <img src={EarningIcon} alt="Notification" />
+                    </Avatar>
                   </Grid>
-                
+
                 </Grid>
               </Grid>
               <Grid item>
@@ -155,63 +160,63 @@ const EarningCard = ({ isLoading }) => {
                     color: theme.palette.secondary[200]
                   }}
                 >
-                   Income
+                  Income
                 </Typography>
               </Grid>
             </Grid>
           </Box>
 
-     
+
           <Dialog open={isModalOpen} onClose={handleCloseModal} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleCloseModal}
-            sx={{ position: 'absolute', top: theme.spacing(1), right: theme.spacing(1) }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            Add Income
-          </Typography>
-          {/* Инпут поле за дата */}
-          <TextField
-            fullWidth
-            type="date"
-            name="date"
-            value={incomeData?.date}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          />
+            <DialogTitle>
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={handleCloseModal}
+                sx={{ position: 'absolute', top: theme.spacing(1), right: theme.spacing(1) }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Add Income
+              </Typography>
+              {/* Инпут поле за дата */}
+              <TextField
+                fullWidth
+                type="date"
+                name="date"
+                value={incomeData?.date}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
 
-          {/* Инпут поле за сума */}
-          <TextField
-            fullWidth
-            label="Amount"
-            type="number"
-            name="amount"
-            value={incomeData.amount}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          />
+              {/* Инпут поле за сума */}
+              <TextField
+                fullWidth
+                label="Amount"
+                type="number"
+                name="amount"
+                value={incomeData.amount}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
 
-          {/* Бутони за добавяне и затваряне */}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddIncome}
-            sx={{ mr: 2 }}
-          >
-            Add
-          </Button>
-          <Button variant="outlined" color="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-        </DialogContent>
-      </Dialog>
+              {/* Бутони за добавяне и затваряне */}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddIncome}
+                sx={{ mr: 2 }}
+              >
+                Add
+              </Button>
+              <Button variant="outlined" color="secondary" onClick={handleCloseModal}>
+                Close
+              </Button>
+            </DialogContent>
+          </Dialog>
 
         </CardWrapper>
       )}

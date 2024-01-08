@@ -74,33 +74,35 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
     amount: '',
   });
 
-  
+
   const [timeValue, setTimeValue] = useState(false);
   const handleExpenseIconClick = () => {
     setExpenseModalOpen(true);
   };
-  
+
   const handleCloseExpenseModal = () => {
     setExpenseModalOpen(false);
   };
-  
+
   const handleExpenseInputChange = (e) => {
     setExpenseData({
       ...expenseData,
       [e.target.name]: e.target.value,
     });
   };
-  
+
   const handleAddExpense = () => {
     console.log('Added expense:', expenseData);
     setExpenseData({
       date: '',
       amount: '',
     });
+    toast.success("Expense added successfully");
+
     handleCloseExpenseModal();
   };
 
-  
+
   const handleChangeTime = (event, newValue) => {
     setTimeValue(newValue);
   };
@@ -115,22 +117,22 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
             <Grid container direction="column">
               <Grid item>
                 <Grid container justifyContent="space-between">
-                <Grid item>
-                  <Avatar
-                    variant="rounded"
-                    sx={{
-                      ...theme.typography.commonAvatar,
-                      ...theme.typography.largeAvatar,
-                      backgroundColor: theme.palette.primary[800],
-                      color: '#fff',
-                      mt: 1,
-                      cursor: 'pointer'
-                    }}
-                    onClick={handleExpenseIconClick}
-                  >
-                    <LocalMallOutlinedIcon fontSize="inherit" />
-                  </Avatar>
-                </Grid>
+                  <Grid item>
+                    <Avatar
+                      variant="rounded"
+                      sx={{
+                        ...theme.typography.commonAvatar,
+                        ...theme.typography.largeAvatar,
+                        backgroundColor: theme.palette.primary[800],
+                        color: '#fff',
+                        mt: 1,
+                        cursor: 'pointer'
+                      }}
+                      onClick={handleExpenseIconClick}
+                    >
+                      <LocalMallOutlinedIcon fontSize="inherit" />
+                    </Avatar>
+                  </Grid>
 
                   <Grid item>
                     <Button
@@ -199,31 +201,31 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
           </Box>
           <Dialog open={isExpenseModalOpen} onClose={handleCloseExpenseModal} maxWidth="sm" fullWidth>
             <DialogTitle>
-                <IconButton
+              <IconButton
                 edge="end"
                 color="inherit"
                 onClick={handleCloseExpenseModal}
                 sx={{ position: 'absolute', top: theme.spacing(1), right: theme.spacing(1) }}
-                >
+              >
                 <CloseIcon />
-                </IconButton>
+              </IconButton>
             </DialogTitle>
             <DialogContent>
-                <Typography variant="h5" sx={{ mb: 2 }}>
+              <Typography variant="h5" sx={{ mb: 2 }}>
                 Add Expense
-                </Typography>
-                {/* Инпут поле за дата */}
-                <TextField
+              </Typography>
+              {/* Инпут поле за дата */}
+              <TextField
                 fullWidth
                 type="date"
                 name="date"
                 value={expenseData?.date}
                 onChange={handleExpenseInputChange}
                 sx={{ mb: 2 }}
-                />
+              />
 
-                {/* Инпут поле за сума */}
-                <TextField
+              {/* Инпут поле за сума */}
+              <TextField
                 fullWidth
                 label="Amount"
                 type="number"
@@ -231,22 +233,22 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                 value={expenseData.amount}
                 onChange={handleExpenseInputChange}
                 sx={{ mb: 2 }}
-                />
+              />
 
-                {/* Бутони за добавяне и затваряне */}
-                <Button
+              {/* Бутони за добавяне и затваряне */}
+              <Button
                 variant="contained"
                 color="primary"
                 onClick={handleAddExpense}
                 sx={{ mr: 2 }}
-                >
+              >
                 Add
-                </Button>
-                <Button variant="outlined" color="secondary" onClick={handleCloseExpenseModal}>
+              </Button>
+              <Button variant="outlined" color="secondary" onClick={handleCloseExpenseModal}>
                 Close
-                </Button>
+              </Button>
             </DialogContent>
-            </Dialog>
+          </Dialog>
 
         </CardWrapper>
       )}

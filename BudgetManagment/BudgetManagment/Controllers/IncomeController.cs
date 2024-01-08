@@ -1,4 +1,5 @@
 ﻿using BudgetManagment;
+using BudgetManagment.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]
@@ -12,8 +13,7 @@ public class IncomeController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpPut("{id}")]
-    [HttpGet]
+    [HttpGet("{id}")]
     public IActionResult GetIncome(int id)
     {
         // Validate unique email
@@ -34,9 +34,9 @@ public class IncomeController : ControllerBase
             return Conflict("Wrong id");
         }
 
-        _dbContext.Incomes.FirstOrDefault(i => i.Id == id)!.Value = income;
+        var currentValue = _dbContext.Incomes.FirstOrDefault(i => i.Id == id)!.Value + income;
+        _dbContext.Incomes.FirstOrDefault(i => i.Id == id)!.Value = currentValue;
         _dbContext.SaveChanges();
-
-        return Ok("User registered successfully");
+        return Ok(currentValue);
     }
 }

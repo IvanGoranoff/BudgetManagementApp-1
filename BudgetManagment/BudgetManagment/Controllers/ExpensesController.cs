@@ -15,7 +15,7 @@ public class ExpensesController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpPut("{id}")]
+    [HttpGet("{id}")]
     [HttpGet]
     public IActionResult GetExpenses(int id)
     {
@@ -29,8 +29,8 @@ public class ExpensesController : ControllerBase
     }
 
 
-    [HttpPut("{id}/{income}")]
-    public IActionResult UpdateExpenses(int id, int income)
+    [HttpPut("{id}/{expenses}")]
+    public IActionResult UpdateExpenses(int id, int expenses)
     {
         // Validate unique email
         if (!_dbContext.Expenses.Any(i => i.Id == id))
@@ -38,9 +38,10 @@ public class ExpensesController : ControllerBase
             return Conflict("Wrong id");
         }
 
-        _dbContext.Expenses.FirstOrDefault(i => i.Id == id)!.Value = income;
+        var currentValue = _dbContext.Expenses.FirstOrDefault(i => i.Id == id)!.Value + expenses;
+        _dbContext.Expenses.FirstOrDefault(i => i.Id == id)!.Value = currentValue;
         _dbContext.SaveChanges();
 
-        return Ok();
+        return Ok(currentValue);
     }
 }

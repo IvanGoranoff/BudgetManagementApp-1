@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 // material-ui
@@ -7,9 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
-    Checkbox,
     FormControl,
-    FormControlLabel,
     FormHelperText,
     Grid,
     IconButton,
@@ -41,7 +38,6 @@ const FirebaseRegister = ({ ...others }) => {
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const [showPassword, setShowPassword] = useState(false);
-    const [checked, setChecked] = useState(true);
 
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
@@ -197,21 +193,6 @@ const FirebaseRegister = ({ ...others }) => {
                         )}
 
                         <Grid container alignItems="center" justifyContent="space-between">
-                            <Grid item>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />
-                                    }
-                                    label={
-                                        <Typography variant="subtitle1">
-                                            Agree with &nbsp;
-                                            <Typography variant="subtitle1" component={Link} to="#">
-                                                Terms & Condition.
-                                            </Typography>
-                                        </Typography>
-                                    }
-                                />
-                            </Grid>
                         </Grid>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>

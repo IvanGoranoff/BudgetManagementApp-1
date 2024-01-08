@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
-
+import { ToastContainer } from 'react-toastify';
 // routing
 import Routes from 'routes';
 
@@ -23,6 +23,7 @@ const App = () => {
         <CssBaseline />
         <NavigationScroll>
           <Routes />
+          <ToastContainer />
         </NavigationScroll>
       </ThemeProvider>
     </StyledEngineProvider>

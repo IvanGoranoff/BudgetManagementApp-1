@@ -48,21 +48,21 @@ const pages = {
           id: 'needs',
           title: 'Needs',
           type: 'item',
-          url: '/sample-page',
+          url: '/needs',
           target: true
         },
         {
           id: 'wants',
           title: 'Wants',
           type: 'item',
-          url: '/sample-page',
+          url: '/wants',
           target: true
         },
         {
           id: 'save',
           title: 'Save',
           type: 'item',
-          url: '/sample-page',
+          url: '/save',
           target: true
         }
       ]
