@@ -67,10 +67,9 @@ const EarningCard = ({ isLoading }) => {
   const theme = useTheme();
   const [isModalOpen, setModalOpen] = useState(false);
   const [incomeData, setIncomeData] = useState({
-    date: '',
     amount: '',
   });
-  const [expenseData, setExpenseData] = useState(null);
+  const [ApiIncomeData, setApiIncomeData] = useState(null);
 
   const handleEarningIconClick = () => {
     setModalOpen(true);
@@ -83,18 +82,18 @@ const EarningCard = ({ isLoading }) => {
   };
 
   useEffect(() => {
-    const fetchExpenseData = async () => {
+    const fetchApiIncomeData = async () => {
       try {
-        const response = await axios.get('https://localhost:7069/api/Expenses/1');
-        setExpenseData(response.data); // Assuming response.data is the number 1001
+        const response = await axios.get('https://localhost:7069/api/Income/1');
+        setApiIncomeData(response?.data);
         console.log('Response data:', response.data); // Logging the data
       } catch (error) {
-        console.error('Error fetching expense data:', error);
+        console.error('Error fetching ApiIncome data:', error);
         // Handle error appropriately
       }
     };
 
-    fetchExpenseData();
+    fetchApiIncomeData();
   }, []);
 
 
@@ -106,13 +105,17 @@ const EarningCard = ({ isLoading }) => {
     });
   };
 
-  const handleAddIncome = () => {
-    setIncomeData({
-      date: '',
-      amount: '',
-    });
-    console.log('Added income:', incomeData);
-    toast.success("Income added successfully");
+  const handleAddIncome = async () => {
+    try {
+      await axios.put(`https://localhost:7069/api/Income/1/${incomeData.amount}`);
+      const updatedIncomeResponse = await axios.get('https://localhost:7069/api/Income/1');
+      setApiIncomeData(updatedIncomeResponse.data);
+      setIncomeData({ amount: '' });
+      toast.success("Income updated successfully");
+    } catch (error) {
+      console.error('Error updating income:', error);
+      toast.error("Error updating income");
+    }
     handleCloseModal();
   };
 
@@ -155,7 +158,7 @@ const EarningCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{`$${expenseData.toString()}`}</Typography>
+                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{`$${ApiIncomeData?.toString()}`}</Typography>
                   </Grid>
                   <Grid item>
                     <Avatar
@@ -201,16 +204,6 @@ const EarningCard = ({ isLoading }) => {
               <Typography variant="h5" sx={{ mb: 2 }}>
                 Add Income
               </Typography>
-              {/* Инпут поле за дата */}
-              <TextField
-                fullWidth
-                type="date"
-                name="date"
-                value={incomeData?.date}
-                onChange={handleInputChange}
-                sx={{ mb: 2 }}
-              />
-
               {/* Инпут поле за сума */}
               <TextField
                 fullWidth
